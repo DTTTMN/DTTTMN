@@ -1,0 +1,26 @@
+
+
+printf("Nhap mot so bat ky: ");  
+    scanf("%d",&n);  
+    for(i=0;n>0;i++)  
+    {  
+        a[i]=n%16;  
+        n=n/16;  
+    } 
+printf("\nDang nhi phan cua so vua nhap la = ");  
+    for(i=i-1;i>=0;i--)  
+    {  
+        if (a[i]<10)
+            printf("%d ",a[i]);  
+        else 
+            switch (a[i])
+            {
+                case 10: printf("A");break;
+                case 11: printf("B");break;
+                case 12: printf("C");break;
+                case 13: printf("D");break;
+                case 14: printf("E");break;
+                case 15: printf("F");break;
+            }
+
+    } 

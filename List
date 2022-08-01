@@ -1,0 +1,133 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef int ElementType;
+typedef struct Node* NodeType;
+struct Node
+{
+	ElementType Element;//lưu trữ giá trị
+	NodeType Next;//lưu trữ địa chỉ node kế
+};
+typedef NodeType Position;// Kiểu vị trí
+typedef Position List;
+
+void Makenull_List(List *L)
+{
+	(*L)=(NodeType)malloc(sizeof(NodeType));
+// Cấp phát vùng nhớ cho Header với kích thước 1 node
+	(*L) -> Next = NULL;
+
+}
+
+int Empty_List(List L)
+{
+	return (L -> Next == NULL);
+}
+
+Position First_List(List L)
+{
+	return L;
+}
+
+Position End_List(List L)
+{
+	Position P = First_List(L);
+	while (P -> Next!=NULL)
+		P=P->Next;
+	return P;
+}
+
+Position Next_List(Position P, List L)
+{
+    return P->Next;
+}
+
+Position Previous_List (Position P, List L) 
+{ 
+	Position Q = First_List (L);
+	while (Q->Next !=P) Q=Q->Next;
+	return Q;
+}
+
+ElementType Retrieve_List (Position P, List L)
+{
+    if (P->Next != NULL)
+		return P-> Next->Element;
+}
+
+Position Locate_List (ElementType X, List L)
+{
+	Position P = First_List (L);
+	while (P->Next != NULL ) 
+		if (P->Next->Element==X) break;
+		P=P->Next; 
+	return P;
+}
+void SWAP(int a, int b)
+{
+	int c=a;
+	a=b;
+	b=c;
+}
+
+void Insert_List (ElementType X, Position P, List *L) 
+{ 
+	Position T;
+	T=(NodeType)malloc(sizeof(NodeType));
+	T->Element = X;
+	T->Next = P->Next;
+	P->Next = T;
+}
+
+void delete_List(Position P, List *L)
+{
+	Position T;
+	if (P-> Next)
+		T=P->Next;
+		P-> Next = T->Next;
+		free(T);
+}
+
+void Read_List(List *L) 
+{
+    int i,n;
+    ElementType X;
+    Makenull_List(L);
+    printf("So phan tu danh sach: ");scanf("%d",&n);
+    for(i=1; i<=n; i++) 
+    {
+        printf("Phan tu thu %d: ",i);scanf("%d",&X);
+        Insert_List(X, End_List(*L), L);
+    }
+}
+
+void Print_List(List L) 
+{
+    Position P;
+	printf("Danh ssch la: \n");
+    P = First_List(L);
+    while (P != End_List(L)) 
+    {
+        printf("%d ",Retrieve_List(P,L));
+        P = Next_List(P, L);
+    }
+}  
+
+void Sort_List(List L)
+{
+	int T;
+	Position P,Q;
+	P= First_List(L);
+	while (P!= End_List(L))
+	{
+		Q = Next_List(P,L);
+		while (Q!= End_List(L))
+		{
+			if (Retrieve_List(P,L)> (Retrieve_List(Q,L)))
+			{
+				SWAP(P->Next->Element,Q->Next->Element);
+			}
+			Q= Next_List(P, L);
+		}
+		P= Next_List(P, L);
+	}
+}

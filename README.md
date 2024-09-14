@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @DTTTMN
+- 👋 Hi, I’m @maimailabaolau
 - 👀 I’m interested in AI
 - 🌱 I’m currently learning Information Technology
 - 💞️ I’m looking to collaborate on Github
